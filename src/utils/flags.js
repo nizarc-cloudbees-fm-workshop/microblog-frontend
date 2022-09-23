@@ -1,7 +1,8 @@
 import Rox from 'rox-browser'
 
 export const Flags = {
-  sidebar: new Rox.Flag(false)
+  sidebar: new Rox.Flag(false),
+  title: new Rox.flag(false)
 }
 
 async function initCloudBees () {
