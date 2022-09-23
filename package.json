@@ -1,0 +1,95 @@
+{
+  "name": "microblog-frontend",
+  "packageManager": "yarn@3.2.3",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:dev": "vue-cli-service build --mode development",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint --fix"
+  },
+  "dependencies": {
+    "@babel/core": "^7.19.1",
+    "@babel/plugin-syntax-jsx": "^7.0.0-0",
+    "@babel/preset-env": "^7.19.1",
+    "@vue/babel-plugin-jsx": "^1.1.1",
+    "@vue/babel-preset-app": "^5.0.8",
+    "autoprefixer": "^9.0.0",
+    "axios": "^0.21.2",
+    "babel-loader": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "cache-loader": "^4.1.0",
+    "core-js": "^2.6.5",
+    "deasync": "^0.1.28",
+    "eslint-loader": "^4.0.2",
+    "node-gyp": "^9.1.0",
+    "postcss": "^8.4.16",
+    "register-service-worker": "^1.6.2",
+    "rox-browser": "^5.4.2",
+    "uuid": "^3.3.3",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.12.0",
+    "@vue/cli-plugin-eslint": "^3.12.0",
+    "@vue/cli-plugin-pwa": "^3.12.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.4",
+    "@vue/cli-service": "^4.5.4",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^29.0.3",
+    "buefy": "^0.8.7",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "jest-junit": "^10.0.0",
+    "vue-cli-plugin-buefy": "^0.3.7",
+    "vue-jest": "^3.0.5",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,vue}",
+      "!**/node_modules/**"
+    ],
+    "coverageReporters": [
+      "text"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/jest-serializer-vue"
+    ],
+    "verbose": true,
+    "reporters": [
+      "default",
+      "jest-junit"
+    ]
+  },
+  "jest-junit": {
+    "outputDirectory": "output/coverage/junit/",
+    "outputName": "junit.xml",
+    "usePathForSuiteName": "true"
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
+}
