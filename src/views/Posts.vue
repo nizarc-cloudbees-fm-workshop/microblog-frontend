@@ -2,15 +2,37 @@
   <div class="container">
     <hr class="hr is-invisible">
     <div class="box">
-
-      <h1 class="title">Posts</h1>
+      <h1 class="title">Posts <span v-if="show_title"> - Show New Title!</span></h1>
       <hr class="hr">
-      <div class="box">
+      <div class="columns" v-if="show_sidebar">
+        <div class="box column is-three-quarters">
+          <div class="box">
+            <b-field label="What's going on today?"
+                     class="is-marginless"
+            >
+              <b-input v-model="message" maxlength="140" type="textarea"/>
+            </b-field>
+            <b-button type="is-dark" @click="addPost">Submit</b-button>
+          </div>
+          <hr class="hr">
+          <Post v-for="post in posts" :key="post.id" :post="post"/>
+        </div>
+        <div class="box column">
+          <h3 class="is-size-4 has-text-weight-bold">Users list</h3>
+          <ul>
+            <li v-for="user in users" :key="user.url">
+              <a :href="user.url">{{user.username}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="box" v-else>
         <div class="box">
           <b-field label="What's going on today?"
                    class="is-marginless"
           >
-            <b-input v-model="message" maxlength="140" type="textarea"></b-input>
+            <b-input v-model="message" maxlength="140" type="textarea"/>
           </b-field>
           <b-button type="is-dark" @click="addPost">Submit</b-button>
         </div>
@@ -25,17 +47,22 @@
 import Post from '@/components/Post.vue'
 import axios from 'axios'
 import { mapGetters, mapState } from 'vuex'
+import { Flags } from '../utils/flags'
 
 export default {
   name: 'posts',
   components: {
     Post
   },
+  
   data: function () {
     return {
       message: '',
       posts: [],
-      errors: []
+      users: [],
+      errors: [],
+      show_sidebar: Flags.sidebar.isEnabled(),
+      show_title: Flags.title.isEnabled()
     }
   },
   created () {
@@ -53,6 +80,15 @@ export default {
       axios.get(`${process.env.VUE_APP_BASE_API_URL}/posts/`)
         .then(response => {
           this.posts = response.data
+        })
+        .catch(error => {
+          this.errors.push(error)
+        })
+    },
+    getUsers: function () {
+      axios.get(`${process.env.VUE_APP_BASE_API_URL}/users/`)
+        .then(response => {
+          this.users = response.data
         })
         .catch(error => {
           this.errors.push(error)

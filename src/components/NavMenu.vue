@@ -12,6 +12,9 @@
       <b-navbar-item href="/about">
         About
       </b-navbar-item>
+      <b-navbar-item v-if="isDev">
+        <span @click="rolloutOverride">DEV</span>
+      </b-navbar-item>
     </template>
 
     <template slot="end">
@@ -39,11 +42,20 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import Rox from 'rox-browser'
 
 export default {
   methods: {
     logout () {
       this.$store.dispatch('logout')
+    },
+    rolloutOverride: () => {
+      Rox.showOverrides()
+    }
+  },
+  data () {
+    return {
+      isDev: process.env.NODE_ENV === 'development'
     }
   },
   created () {
